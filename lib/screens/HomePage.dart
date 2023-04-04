@@ -8,7 +8,7 @@ import 'package:weather_app/widgets/Details.dart';
 import 'package:weather_app/widgets/Weekly.dart';
 
 class HomePage extends StatefulWidget {
-  final String latitude,longitude;
+  final String latitude, longitude;
 
   const HomePage({Key key, this.latitude, this.longitude}) : super(key: key);
   @override
@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   Color textCol, corFundo, textListCol, containerItemListCol;
   bool visibleDetails;
 
-  
   setCores() {
     if (valueSwitch == false) {
       corUmi = Colors.blue[100];
@@ -62,17 +61,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;    
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: corFundo,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'ClearWeather',
+          'Whether Weather',
           style: TextStyle(
             fontSize: width * 0.05,
             color: textCol.withOpacity(0.7),
@@ -95,14 +95,14 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(
-          //height: height,
+          // height: height,
           width: width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              //Text("${widget.latitude} --- ${widget.longitude} "),
               Padding(
-                padding: EdgeInsets.only(left: width * 0.1, right: width * 0.1, top: width * 0.04),
+                padding: EdgeInsets.only(
+                    left: width * 0.1, right: width * 0.1, top: width * 0.04),
                 child: FutureBuilder(
                     future: getWeather(
                         util.appID,
@@ -112,9 +112,17 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, snapshot) {
                       Map resJson = snapshot.data;
                       if (snapshot.hasData) {
+                        print('${resJson['list']}');
+                        print('${resJson['main']['temp_max']}');
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            Text(
+                              '     ${formatData.format(currentDate)}',
+                              style: TextStyle(
+                                  fontSize: width * 0.05 /*17*/,
+                                  color: Colors.orange[700]),
+                            ),
                             Row(
                               children: <Widget>[
                                 GestureDetector(
@@ -160,8 +168,10 @@ class _HomePageState extends State<HomePage> {
                                                   BorderRadius.circular(15))),
                                       onSubmitted: (_) {
                                         setState(() {
-                                          if (_locationController.text == null ||
-                                              _locationController.text.isEmpty) {
+                                          if (_locationController.text ==
+                                                  null ||
+                                              _locationController
+                                                  .text.isEmpty) {
                                           } else {
                                             _locationInfo =
                                                 _locationController.text;
@@ -175,10 +185,15 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: width * 0.009,
                             ),
-                            Text('       ${formatData.format(currentDate)}',
+                            Text(
+                              "       ${resJson['coord']['lat']},  ${resJson['coord']['lon']} ",
                               style: TextStyle(
-                                  fontSize: width * 0.04 /*17*/,
-                                  color: Colors.orange[700]),
+                                  fontSize: width * 0.038, //15,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.grey[600]),
+                            ),
+                            SizedBox(
+                              height: width * 0.02,
                             ),
                             SizedBox(
                               height: width * 0.01,
@@ -216,17 +231,19 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: width * 0.33,//140,
+                                    top: width * 0.33, //140,
                                     left: 5,
                                     child: Row(
                                       children: <Widget>[
-                                        Text('Min: ${resJson['main']['temp_min']}°',
+                                        Text(
+                                          'Min: ${resJson['main']['temp_min']}°',
                                           style: TextStyle(
                                               fontSize: width * 0.038, //15,
                                               fontWeight: FontWeight.w300,
                                               color: Colors.grey[400]),
                                         ),
-                                        Text('/ Max: ${resJson['main']['temp_max']}°',
+                                        Text(
+                                          '/ Max: ${resJson['main']['temp_max']}°',
                                           style: TextStyle(
                                               fontSize: width * 0.038, //15,
                                               fontWeight: FontWeight.w300,
@@ -248,9 +265,9 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  
                                   Row(
-                                    mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       GestureDetector(
                                         onTap: () {
@@ -276,7 +293,8 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(15)),
                                           child: Center(
-                                            child: Text('Details',
+                                            child: Text(
+                                              'Details',
                                               style: TextStyle(
                                                   fontSize:
                                                       visibleDetails == true
@@ -315,7 +333,8 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(15)),
                                           child: Center(
-                                            child: Text('Previous',
+                                            child: Text(
+                                              'Previous',
                                               style: TextStyle(
                                                   fontSize:
                                                       visibleDetails == false
@@ -363,14 +382,14 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 height: visibleDetails == true ? 0 : height * 0.6, //400,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30, right: 300),
-                    child: Weekly(
-                      location: _locationInfo,
-                      containerItemListCol: containerItemListCol,
-                      textListCol: textListCol,
-                    ),
-                    ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Weekly(
+                    location: _locationInfo,
+                    containerItemListCol: containerItemListCol,
+                    textListCol: textListCol,
+                  ),
+                ),
               ),
               SizedBox(
                 height: 30,

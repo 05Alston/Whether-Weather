@@ -9,8 +9,7 @@ class Weekly extends StatelessWidget {
   final String location;
   final Color textListCol, containerItemListCol;
 
-  Weekly(
-      {Key key, this.location, this.textListCol, this.containerItemListCol})
+  Weekly({Key key, this.location, this.textListCol, this.containerItemListCol})
       : super(key: key);
 
   String yearMonth;
@@ -29,6 +28,7 @@ class Weekly extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Map content = snapshot.data;
+            print(content['list']);
             List contentList = content['list'];
 
             double TemperatureSum = 0;
@@ -42,8 +42,7 @@ class Weekly extends StatelessWidget {
 
             contentList.forEach((f) {
               if (f.toString().contains("${yearMonth}")) {
-                listDays
-                    .add(formatYMD.format(DateTime.parse(f['dt_txt'])));
+                listDays.add(formatYMD.format(DateTime.parse(f['dt_txt'])));
               }
             });
 
@@ -70,10 +69,10 @@ class Weekly extends StatelessWidget {
 
               listTemp.add(TemperatureSum);
 
-              print('Total Temp:${listDaysUnique[i]} :$TemperatureSum');
-              print(
-                  'Average Temp:${listDaysUnique[i]} :${(TemperatureSum /
-                      qntdForPercorrido)}');
+              // print('Total Temp:${listDaysUnique[i]} :$TemperatureSum');
+              // print(
+              //     'Average Temp:${listDaysUnique[i]} :${(TemperatureSum /
+              //         qntdForPercorrido)}');
 
               listTempDIA.add((TemperatureSum / qntdForPercorrido).round());
               listMapDataTemp.add({
@@ -85,28 +84,28 @@ class Weekly extends StatelessWidget {
               TemperatureSum = 0;
               qntdForPercorrido = 0;
             }
-            print(
-                'COMPARISON DATES (LIST MAP TEMP and NOW): ${listMapDataTemp[0]['data']}  -  ${formatYMD.format(currentDate)}');
+            // print(
+            //     'COMPARISON DATES (LIST MAP TEMP and NOW): ${listMapDataTemp[0]['data']}  -  ${formatYMD.format(currentDate)}');
             if (listMapDataTemp[0]
                 .toString()
                 .contains(formatYMD.format(currentDate))) {
               listMapDataTemp.removeAt(0);
             }
-            if(listMapDataTemp.length >5){
+            if (listMapDataTemp.length > 5) {
               listMapDataTemp.removeLast();
             }
 
-            print('----------------------');
-            print('LIST TEMP: $listTemp');
-            print('LIST TEMP AVERAGE: $listTempDIA');
-            print('LIST MAP DAY_TEMP: $listMapDataTemp');
+            // print('----------------------');
+            // print('LIST TEMP: $listTemp');
+            // print('LIST TEMP AVERAGE: $listTempDIA');
+            // print('LIST MAP DAY_TEMP: $listMapDataTemp');
 
-            print('----------------------');
+            // print('----------------------');
             if (iconList.length < 5) {
               iconList.add({'icon': '03d'});
             }
 
-            print('ICON LIST: $iconList');
+            // print('ICON LIST: $iconList');
 
             return Container(
               width: MediaQuery.of(context).size.width,

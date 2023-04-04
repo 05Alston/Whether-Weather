@@ -10,7 +10,12 @@ class ItemListTempWeek extends StatelessWidget {
   final String animation;
 
   const ItemListTempWeek(
-      {Key key, this.data, this.temp, this.textCol, this.containerCol, this.animation})
+      {Key key,
+      this.data,
+      this.temp,
+      this.textCol,
+      this.containerCol,
+      this.animation})
       : super(key: key);
 
   @override
@@ -26,46 +31,43 @@ class ItemListTempWeek extends StatelessWidget {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-              color: containerCol, borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(15)
-              )),
+              color: containerCol,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(15))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.only(left: width * 0.02,right: width * 0.02,top: width * 0.04,bottom: width * 0.04),
-                    decoration: BoxDecoration(
-                        //color: Colors.blue[900],
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                          Colors.blue[900],Colors.purple
-                        ]),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(5),
-                          topRight: Radius.circular(25)
-                        )),
-                    child: Center(
-                      child: Text(
-                        dataFormatted,
-                        style: TextStyle(
-                          fontSize: width * 0.04,//17,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      ),
-                    ),
+              Container(
+                width: width * 0.2,
+                padding: EdgeInsets.only(
+                    left: width * 0.02,
+                    right: width * 0.02,
+                    top: width * 0.04,
+                    bottom: width * 0.04),
+                decoration: BoxDecoration(
+                    //color: Colors.blue[900],
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Colors.blue[900], Colors.purple]),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(25),
+                        bottomRight: Radius.circular(5),
+                        topRight: Radius.circular(25))),
+                child: Center(
+                  child: Text(
+                    dataFormatted,
+                    style: TextStyle(
+                        fontSize: width * 0.04, //17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
-
-
-
+                ),
+              ),
               Row(
                 children: <Widget>[
                   Container(
@@ -78,13 +80,13 @@ class ItemListTempWeek extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: 15,left: 10),
+                    padding: EdgeInsets.only(right: 15, left: 10),
                     child: Text(
                       '${temp[0]}${temp[1].replaceAll(".", "")}°c',
                       style: TextStyle(
-                        fontSize:width * 0.05 ,//20,
-                        color: textCol,
-                        fontWeight: FontWeight.w600),
+                          fontSize: width * 0.05, //20,
+                          color: textCol,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
