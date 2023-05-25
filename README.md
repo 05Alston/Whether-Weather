@@ -1,16 +1,37 @@
-# weather
+# Whether Weather
 
-A Flutter project for a minimal weather app.
+## A Flutter project for a minimal weather app
 
-## Getting Started
+This is a simple implementation of a weather app using Flutter.
 
-This project is a starting point for a Flutter application.
+- Openweather API has been used to get the weather info.
+- Additional information such as humidity, visibility and wind speed are also displayed.
+- Future date weather also displayed.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Usage
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Clone the repository.
+- Sign up at [OpenWeather](https://openweathermap.org/api) for the API key.
+- Go to `lib/util/util.dart` and update the API key.
+- Run `flutter build` .
+
+### Screenshots
+
+Default location| Change location
+--|--
+![default](./assets/images/image1.png)|![extra](./assets/images/image2.png)
+
+Default information| Future information
+--|--
+![default](./assets/images/image3.png)|![extra](./assets/images/image4.png)
+
+Light Theme| Dark Theme
+--|--
+![light](./assets/images/image3.png)|![dark](./assets/images/image5.png)
+
+### TODO
+
+1. Use Geolocator package to get the current location.
+2. Better UI

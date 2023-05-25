@@ -4,7 +4,7 @@ import 'package:http/http.dart'as http;
 
 Future<Map> getWeather(String appID,String location)async{
   String urlAPI ='http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${appID}&units=metric';
-  http.Response response = await http.get(urlAPI);
+  http.Response response = await http.get(Uri.parse(urlAPI));
 
   if(response.statusCode == 200){
     return json.decode(response.body);
@@ -18,7 +18,7 @@ Future<Map> getWeather(String appID,String location)async{
 
 Future<Map> getListToday(String appID,String location)async{
   String urlAPI ='http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${appID}&units=metric';
-  http.Response response = await http.get(urlAPI);
+  http.Response response = await http.get(Uri.parse(urlAPI));
 
   if(response.statusCode == 200){
     return json.decode(response.body);
